@@ -14,7 +14,7 @@
   <ul>
     {% for sprt in sprites %}
       <li>
-        <a href="{{ sprt.sprite.url }}">{{ sprt.sprite.name }}</a>
+        <a href="{{ sprt.image.url }}">{{ sprt.image.name }}</a>
         <small>(Uploaded at: {{ sprt.uploaded_at }})</small>
       </li>
     {% endfor %}
