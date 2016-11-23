@@ -5,11 +5,16 @@ from django.core.files.storage import FileSystemStorage
 from uploads.core.models import Document, Sprite
 from uploads.core.forms import DocumentForm, SpriteForm
 
+import numpy as np
+from scipy import linalg, optimize
+
 def home(request):
     sprites = Sprite.objects.all()
-#    documents = Document.objects.all()
     return render(request, 'core/home.html', { 'sprites': sprites })
 
+def kmeans(request):
+    sprites = Sprite.objects.all()
+    return render(request, 'kmeans/organize.html', { 'sprites': sprites })
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
