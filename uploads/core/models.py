@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Sprite(models.Model):
-    image = models.FileField(upload_to='sprites/')
+    image = models.ImageField(upload_to='sprites/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class Document(models.Model):
