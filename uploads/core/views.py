@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from uploads.core.models import Document
-from uploads.core.forms import DocumentForm
-
+from uploads.core.models import Document, Sprite
+from uploads.core.forms import DocumentForm, SpriteForm
 
 def home(request):
-    documents = Document.objects.all()
-    return render(request, 'core/home.html', { 'documents': documents })
+    sprites = Sprite.objects.all()
+#    documents = Document.objects.all()
+    return render(request, 'core/home.html', { 'sprites': sprites })
 
 
 def simple_upload(request):
@@ -25,12 +25,12 @@ def simple_upload(request):
 
 def model_form_upload(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = SpriteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
-        form = DocumentForm()
+        form = SpriteForm()
     return render(request, 'core/model_form_upload.html', {
         'form': form
     })
