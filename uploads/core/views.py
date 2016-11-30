@@ -5,21 +5,33 @@ from django.core.files.storage import FileSystemStorage
 from uploads.core.models import Document, Sprite
 from uploads.core.forms import DocumentForm, SpriteForm
 
+from uploads.core.load import load_all_images
+
 import numpy as np
 from scipy import linalg, optimize
 
 from django.core.files.storage import default_storage
 
+import sys
+import os
+import subprocess as sub
+
 def home(request):
     sprites = Sprite.objects.all()
-    return render(request, 'core/home.html', { 'sprites': sprites })
+    return render(request, 'core/home.html', { 'sprites': sprites[:10] })
 
-def kmeans(request):
+def organize(request):
     sprites = Sprite.objects.all()
-    return render(request, 'kmeans/organize.html', { 'sprites': sprites })
+    return render(request, 'organize/organize.html', { 'sprites': sprites[:10] })
 
 def clean(request):
     Sprite.objects.all().delete()
+    sprites = Sprite.objects.all()
+    p = sub.Popen(['/usr/bin/rm', '-rf', '/home/mfurquim/projects/imageorganizer/media/sprites/'],stdout=sub.PIPE,stderr=sub.PIPE)
+    return render(request, 'core/home.html', { 'sprites': sprites })
+
+def load_all(request):
+    images = load_all_images()
     sprites = Sprite.objects.all()
     return render(request, 'core/home.html', { 'sprites': sprites })
 
