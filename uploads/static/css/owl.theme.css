@@ -1,5 +1,5 @@
 /*
-* 	Owl Carousel Owl Demo Theme 
+* 	Owl Carousel Owl Demo Theme
 *	v1.3.3
 */
 
@@ -74,6 +74,6 @@
 
 /* preloading images */
 .owl-item.loading{
-	min-height: 150px;
+	min-height: 10px;
 	background: url(AjaxLoader.gif) no-repeat center center
 }

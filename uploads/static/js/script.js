@@ -1,14 +1,14 @@
 /*
 Theme: Flatfy Theme
 Author: Andrea Galanti
-Bootstrap Version 
+Bootstrap Version
 Build: 1.0
 http://www.andreagalanti.it
 */
 
-$(window).load(function() { 
-	//Preloader 
-	$('#status').delay(300).fadeOut(); 
+$(window).load(function() {
+	//Preloader
+	$('#status').delay(300).fadeOut();
 	$('#preloader').delay(300).fadeOut('slow');
 	$('body').delay(550).css({'overflow':'visible'});
 })
@@ -18,19 +18,19 @@ $(document).ready(function() {
 		$(".navbar-brand").hover(function () {
 			$(this).toggleClass("animated shake");
 		});
-		
+
 		//animated scroll_arrow
 		$(".img_scroll").hover(function () {
 			$(this).toggleClass("animated infinite bounce");
 		});
-		
+
 		//Wow Animation DISABLE FOR ANIMATION MOBILE/TABLET
 		wow = new WOW(
 		{
 			mobile: false
 		});
 		wow.init();
-		
+
 		//MagnificPopup
 		$('.image-link').magnificPopup({type:'image'});
 
@@ -38,7 +38,7 @@ $(document).ready(function() {
 		// OwlCarousel N1
 		$("#owl-demo").owlCarousel({
 			autoPlay: 3000,
-			items : 3,
+			items : 6,
 			itemsDesktop : [1199,3],
 			itemsDesktopSmall : [979,3]
 		});
@@ -64,11 +64,11 @@ $(document).ready(function() {
 					}
 			}
 		});
-		
+
 		//Subscribe
 		new UIMorphingButton( document.querySelector( '.morph-button' ) );
 		// for demo purposes only
-		[].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) { 
+		[].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) {
 			bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
 		} );
 
