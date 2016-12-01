@@ -18,6 +18,13 @@ import subprocess as sub
 
 def home(request):
     sprites = Sprite.objects.all()
+    if request.method == 'POST':
+        form = SpriteForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+
     return render(request, 'core/home.html', { 'sprites': sprites[:10] })
 
 def organize(request):

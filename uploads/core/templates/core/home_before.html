@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <ul>
+    <!-- <li>
+      <a href="{% url 'simple_upload' %}">Simple Upload</a>
+    </li> -->
+    <li>
+      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>
+    </li>
+    <li>
+      <a href="{% url 'organize' %}">organize</a>
+    </li>
+  </ul>
+
+  <p>Uploaded files:</p>
+  <ul>
+    {% for sprt in sprites %}
+      <li>
+        <a href="{{ sprt.image.url }}">{{ sprt.image.name }}</a>
+        <small>(Uploaded at: {{ sprt.uploaded_at }})</small>
+      </li>
+    {% endfor %}
+  </ul>
+
+
+  <ul>
+    <li>
+      <a href="{% url 'load_all' %}">load</a>
+    </li>
+    <li>
+      <a href="{% url 'clean' %}">clean</a>
+    </li>
+  </ul>
+
+{% endblock %}

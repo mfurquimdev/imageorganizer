@@ -1,19 +1,114 @@
-{% extends 'base.html' %}
+
+ {% load staticfiles %}
+
+ <!-- FlatFy Theme - Andrea Galanti /-->
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Flatfy Free Flat and Responsive HTML5 Template ">
+    <meta name="author" content="">
+
+    <title>Flatfy – Free Flat and Responsive HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom Google Web Font -->
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS-->
+    <link href="{% static "css/general.css" %}" rel="stylesheet">
+
+	 <!-- Owl-Carousel -->
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+	<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
+    <link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
+	<link href="{% static "css/style.css" %}" rel="stylesheet">
+	<link href="{% static "css/animate.css" %}" rel="stylesheet">
+
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+
+
+
+	<script src="{% static "js/modernizr-2.8.3.min.js" %}"></script>  <!-- Modernizr /-->
+	<!--[if IE 9]>
+		<script src="js/PIE_IE9.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+		<script src="js/PIE_IE678.js"></script>
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+	<![endif]-->
+<script src="{% static "js/jquery-2.1.min.js" %}"></script>
+<link href="{% static "css/fileinput.min.css" %}" media="all" rel="stylesheet" type="text/css" />
+<!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
+     This must be loaded before fileinput.min.js -->
+<script src="{% static "js/plugins/canvas-to-blob.min.js" %}" type="text/javascript"></script>
+<!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
+     This must be loaded before fileinput.min.js -->
+<script src="{% static "js/plugins/sortable.min.js" %}" type="text/javascript"></script>
+<!-- purify.min.js is only needed if you wish to purify HTML content in your preview for HTML files.
+     This must be loaded before fileinput.min.js -->
+<script src="{% static "js/plugins/purify.min.js" %}" type="text/javascript"></script>
+<!-- the main fileinput plugin file -->
+<script src="{% static "js/fileinput.min.js" %}"></script>
+
+
+</head>
 
 {% block content %}
-  <ul>
-    <!-- <li>
-      <a href="{% url 'simple_upload' %}">Simple Upload</a>
-    </li> -->
-    <li>
-      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>
-    </li>
-    <li>
-      <a href="{% url 'organize' %}">organize</a>
-    </li>
-  </ul>
 
-  <p>Uploaded files:</p>
+<body id="home">
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
+
+	<!-- FullScreen -->
+    <div class="intro-header">
+		<div class="col-xs-12 text-center abcen1">
+			<h1 class="h1_home wow fadeIn" data-wow-delay="0.4s">Uploadr</h1>
+			<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">Carregue uma imagem do seu computador</h3>
+
+
+			  <div class="row fadeIn" data-wow-delay="0.8s">
+			        <div class="col-sm-10 col-sm-offset-1 hid">
+			            <div class="row">
+			               <div class="col-sm-6 col-sm-offset-3 text-center">
+                                      <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <input id="input-1a" name="image" type="file" class="file" data-show-preview="false">
+                                      </form>
+
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+
+		</div>
+
+	        <!-- /.container -->
+		<div class="col-xs-12 text-center abcen wow fadeIn">
+			<div class="button_down ">
+				<a class="imgcircle wow bounceInUp" data-wow-duration="1.5s"  href="#screen"> <img class="img_scroll" src="{% static "img/icon/circle.png" %}" alt=""> </a>
+			</div>
+		</div>
+	</div>
+
+<p>Uploaded files:</p>
   <ul>
     {% for sprt in sprites %}
       <li>
@@ -21,16 +116,93 @@
         <small>(Uploaded at: {{ sprt.uploaded_at }})</small>
       </li>
     {% endfor %}
-  </ul>
+</ul>
+	<!-- Screenshot -->
+	<div id="screen" class="content-section-b">
+        <div class="container">
+          <div class="row" >
+			 <div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+				<h2>Screen App</h2>
+				<p class="lead" style="margin-top:0">A special thanks to Death.</p>
+			 </div>
+		  </div>
+		    <div class="row wow bounceInUp" >
+              <div id="owl-demo" class="owl-carousel">
+
+				<a href="{% static "img/slide/1.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/1.png" %}" alt="Owl Image">
+					</div>
+				</a>
+
+               <a href="{% static "img/slide/2.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/2.png" %}" alt="Owl Image">
+					</div>
+				</a>
+
+				<a href="{% static "img/slide/3.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/3.png" %}" alt="Owl Image">
+					</div>
+				</a>
+
+				<a href="{% static "img/slide/1.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/1.png" %}" alt="Owl Image">
+					</div>
+				</a>
+
+               <a href="{% static "img/slide/2.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/2.png" %}" alt="Owl Image">
+					</div>
+				</a>
+
+				<a href="{% static "img/slide/3.png" %}" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static "img/slide/3.png" %}" alt="Owl Image">
+					</div>
+				</a>
+              </div>
+          </div>
+        </div>
 
 
-  <ul>
-    <li>
-      <a href="{% url 'load_all' %}">load</a>
-    </li>
-    <li>
-      <a href="{% url 'clean' %}">clean</a>
-    </li>
-  </ul>
+	</div>
+
 
 {% endblock %}
+
+
+    <!-- JavaScript -->
+    <script src="{% static "js/jquery-1.10.2.js" %}" ></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+	<script src="{% static "js/owl.carousel.js" %}"></script>
+	<script src="{% static "js/script.js" %}"></script>
+	<!-- StikyMenu -->
+	<script src="{% static "js/stickUp.min.js" %}"></script>
+	<script type="text/javascript">
+	  jQuery(function($) {
+		$(document).ready( function() {
+		  $('.navbar-default').stickUp();
+
+		});
+	  });
+
+	</script>
+	<!-- Smoothscroll -->
+	<script type="text/javascript" src="{% static "js/jquery.corner.js" %}"></script>
+	<script src="{% static "js/wow.min.js" %}"></script>
+	<script>
+	 new WOW().init();
+	</script>
+	<script src="{% static "js/classie.js" %}"></script>
+	<script src="{% static "js/uiMorphingButton_inflow.js" %}"></script>
+	<!-- Magnific Popup core JS file -->
+	<script src="{% static "js/jquery.magnific-popup.js" %}"></script>
+</body>
+
+</html>
+
+
