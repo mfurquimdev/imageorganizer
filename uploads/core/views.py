@@ -25,7 +25,7 @@ def home(request):
             return redirect('home')
 
 
-    return render(request, 'core/home.html', { 'sprites': sprites[:10] })
+    return render(request, 'core/home.html', { 'sprites': sprites[:len(sprites)] })
 
 def organize(request):
     sprites = Sprite.objects.all()

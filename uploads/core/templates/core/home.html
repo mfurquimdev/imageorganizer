@@ -130,7 +130,7 @@
 
                       {% for sprt in sprites %}
 
-                          <a href="{% static "img/slide/1.png" %}" class="image-link">
+                          <a href="{{ sprt.image.url }}" class="image-link">
                               <div class="item">
                                     <img  class="img-responsive img-rounded" src="{{ sprt.image.url }}" alt="{{ sprt.image.name }}">
                               </div>
