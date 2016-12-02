@@ -2,14 +2,52 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from uploads.core.models import Document
-from uploads.core.forms import DocumentForm
+from uploads.core.models import Document, Sprite
+from uploads.core.forms import DocumentForm, SpriteForm
 
+from uploads.core.load import load_all_images, get_closests
+
+import numpy as np
+from scipy import linalg, optimize
+
+from django.core.files.storage import default_storage
+from django.core.files import File
+
+import sys
+import os
+import subprocess as sub
 
 def home(request):
-    documents = Document.objects.all()
-    return render(request, 'core/home.html', { 'documents': documents })
+    sprites = Sprite.objects.all()
+    if request.method == 'POST' and request.FILES['image']:
+        myfile = request.FILES['image']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        sprite = Sprite()
+        sprite.image.save(filename, File(open('/home/mfurquim/projects/imageorganizer/'+uploaded_file_url, 'rb')))
+        sprite.save()
+        closests = get_closests(filename, sprites)
+        sprites = []
+        for cl in closests:
+            sprites.append(cl[0])
+        return render(request, 'core/home.html', { 'sprites': sprites[:10], 'uploaded_file_url': uploaded_file_url })
+    return render(request, 'core/home.html', { 'sprites': sprites[:10] })
 
+def organize(request):
+    sprites = Sprite.objects.all()
+    return render(request, 'organize/organize.html', { 'sprites': sprites[:10] })
+
+def clean(request):
+    Sprite.objects.all().delete()
+    sprites = Sprite.objects.all()
+    p = sub.Popen(['/usr/bin/rm', '-rf', '/home/mfurquim/projects/imageorganizer/media/sprites/'],stdout=sub.PIPE,stderr=sub.PIPE)
+    return render(request, 'core/home.html', { 'sprites': sprites })
+
+def load_all(request):
+    images = load_all_images()
+    sprites = Sprite.objects.all()
+    return render(request, 'core/home.html', { 'sprites': sprites })
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -25,12 +63,12 @@ def simple_upload(request):
 
 def model_form_upload(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = SpriteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
-        form = DocumentForm()
+        form = SpriteForm()
     return render(request, 'core/model_form_upload.html', {
         'form': form
     })

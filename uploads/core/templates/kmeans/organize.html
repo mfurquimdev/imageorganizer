@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<p>Uploaded files:</p>
+<ul>
+  {% for sprt in sprites %}
+    <li>
+      <p>url: "{{ sprt.image.url }}"</p>
+      <img src="media/{{ sprt.image.url }}" alt="media/{{ sprt.image.name }}" >
+    </li>
+  {% endfor %}
+</ul>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
