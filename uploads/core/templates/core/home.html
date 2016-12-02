@@ -21,8 +21,8 @@
 
     <!-- Custom Google Web Font -->
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'> -->
 
     <!-- Custom CSS-->
     <link href="{% static "css/general.css" %}" rel="stylesheet">
@@ -108,7 +108,7 @@
 		</div>
 	</div>
 
-<p>Uploaded files:</p>
+  <!-- <p>Uploaded files:</p>
   <ul>
     {% for sprt in sprites %}
       <li>
@@ -116,7 +116,7 @@
         <small>(Uploaded at: {{ sprt.uploaded_at }})</small>
       </li>
     {% endfor %}
-</ul>
+  </ul> -->
 	<!-- Screenshot -->
 	<div id="screen" class="content-section-b">
         <div class="container">
@@ -125,6 +125,13 @@
 				<h2>Sprites</h2>
 			 </div>
 		  </div>
+
+      <a href="{{ uploaded_file_url }}" class="image-link">
+          <div class="item">
+                <img  class="img-responsive img-rounded" src="{{ uploaded_file_url }}" alt="{{ uploaded_file_url }}">
+          </div>
+      </a>
+
 		    <div class="row wow bounceInUp" >
               <div id="owl-demo" class="owl-carousel">
 
@@ -178,5 +185,3 @@
 </body>
 
 </html>
-
-

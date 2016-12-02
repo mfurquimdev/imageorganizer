@@ -5,12 +5,13 @@ from django.core.files.storage import FileSystemStorage
 from uploads.core.models import Document, Sprite
 from uploads.core.forms import DocumentForm, SpriteForm
 
-from uploads.core.load import load_all_images
+from uploads.core.load import load_all_images, get_closests
 
 import numpy as np
 from scipy import linalg, optimize
 
 from django.core.files.storage import default_storage
+from django.core.files import File
 
 import sys
 import os
@@ -18,14 +19,20 @@ import subprocess as sub
 
 def home(request):
     sprites = Sprite.objects.all()
-    if request.method == 'POST':
-        form = SpriteForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-
-
-    return render(request, 'core/home.html', { 'sprites': sprites[:len(sprites)] })
+    if request.method == 'POST' and request.FILES['image']:
+        myfile = request.FILES['image']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        sprite = Sprite()
+        sprite.image.save(filename, File(open('/home/mfurquim/projects/imageorganizer/'+uploaded_file_url, 'rb')))
+        sprite.save()
+        closests = get_closests(filename, sprites)
+        sprites = []
+        for cl in closests:
+            sprites.append(cl[0])
+        return render(request, 'core/home.html', { 'sprites': sprites[:10], 'uploaded_file_url': uploaded_file_url })
+    return render(request, 'core/home.html', { 'sprites': sprites[:10] })
 
 def organize(request):
     sprites = Sprite.objects.all()
